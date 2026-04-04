@@ -1,4 +1,4 @@
-import { Children, StrictMode } from "react";
+import { Children, StrictMode, lazy, Suspense } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 // import App from "./App.jsx";
@@ -13,8 +13,9 @@ import {
   Routes,
 } from "react-router";
 import Contact from "./components/COntact.jsx";
-import User from "./components/User/User.jsx";
-import Github, { GitHUbDatafetch } from "./components/User/Github.jsx";
+// import User from "./components/User/User.jsx"; // normal import
+const User = lazy(() => import("./components/User/User.jsx"));
+import Github, { GitHUbDatafetch } from "./components/User/Github.jsx"; 
 import AdminLayout from "./components/admin/AdminLayout.jsx";
 import AdminRoute from "./components/admin/AdminRoute.jsx";
 import Dashboard from "./components/admin/Dashboard.jsx";
@@ -28,7 +29,14 @@ const router = createBrowserRouter([
       { path: "/home", element: <Home /> },
       { path: "/about", element: <About /> },
       { path: "/contact", element: <Contact /> },
-      { path: "/user/:id", element: <User /> },
+      {
+        path: "/user/:id",
+        element: (
+          <Suspense fallback={<h1>Loading....user data</h1>}>
+            <User />
+          </Suspense>
+        ),
+      },
       // { path: "/github?/:followers", element: <Github />,
       {
         path: "/github",
