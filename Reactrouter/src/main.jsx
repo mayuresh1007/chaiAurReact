@@ -19,12 +19,14 @@ import Github, { GitHUbDatafetch } from "./components/User/Github.jsx";
 import AdminLayout from "./components/admin/AdminLayout.jsx";
 import AdminRoute from "./components/admin/AdminRoute.jsx";
 import Dashboard from "./components/admin/Dashboard.jsx";
+import ErrorPage from "./components/ErrorPage.jsx";
 
 //make sure all in small case
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
+    errorElement:<ErrorPage/>,
     children: [
       { path: "/home", element: <Home /> },
       { path: "/about", element: <About /> },
