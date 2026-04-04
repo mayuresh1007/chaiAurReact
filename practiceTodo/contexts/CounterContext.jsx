@@ -1,0 +1,52 @@
+import { createContext, Provider, useContext, useState } from "react";
+
+// const CounterContext = createContext({
+//   count: 0,
+//   increaseCount: () => {},
+//   decreaseCount: () => {},
+// });
+
+// export const Counterprovider = CounterContext.Provider;
+
+// export default function useCounter() {
+//   return useContext(CounterContext);
+// }
+
+export const CounterContext = createContext();
+
+export const CounterProvider = ({ children }) => {
+  const [count, setCount] = useState(0);
+
+  const increment = () => {
+    setCount(count + 1);
+  };
+  const decrement = () => {
+    setCount(count - 1);
+  };
+
+  return (
+    <CounterContext.Provider value={{ count, increment, decrement }}>
+      {children}
+    </CounterContext.Provider>
+  );
+};
+
+
+
+// CounterContext.js
+// import React, { createContext, useState } from "react";
+
+// export const CounterContext = createContext();
+
+// export const CounterProvider = ({ children }) => {
+//   const [count, setCount] = useState(0);
+
+//   const increment = () => setCount(count + 1);
+//   const decrement = () => setCount(count - 1);
+
+//   return (
+//     <CounterContext.Provider value={{ count, increment, decrement }}>
+//       {children}
+//     </CounterContext.Provider>
+//   );
+// };
